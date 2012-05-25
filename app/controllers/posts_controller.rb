@@ -50,6 +50,13 @@ class PostsController < ApplicationController
 	end
 	
 	def destroy
+		@board = Board.find(params[:board_id])
+		@post = @board.posts.find(params[:id])
+		@post.destroy
+		respond_to do |format|
+			format.html {redirect_to board_posts_path(@board), notice:'刪除成功'}
+			format.json { head :no_content }
+		end
 	end
 
 	def show

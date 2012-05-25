@@ -10,4 +10,5 @@
   <%= link_to 'Back', board_posts_path(@board) %>
   <% if current_user && @post.user == current_user%>
   <%= link_to 'Edit', edit_board_post_path(@board,@post) %>
+  <%= link_to '刪除文章', board_post_path(@board,@post),confirm: 'Are you sure?', :method => :delete %>
   <%end%> 
