@@ -1,0 +1,13 @@
+  <div class="field">
+    <label>標題:</label>
+    <%= @post.title %>
+  </div>
+  <div class="field">
+    <label>文章內容:</label>
+    <br />
+    <%= @post.content %>
+  </div>
+  <%= link_to 'Back', board_posts_path(@board) %>
+  <% if current_user && @post.user == current_user%>
+  <%= link_to 'Edit', edit_board_post_path(@board,@post) %>
+  <%end%> 
