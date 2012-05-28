@@ -16,6 +16,7 @@ class PostsController < ApplicationController
 		@board = Board.find(params[:board_id])
 		@post = @board.posts.build(params[:post])
 		@post.user = current_user
+		PostBoardship.create( :post => @post, :board => @board)
 		respond_to do |format|
 	      if @post.save
 	        format.html { redirect_to board_path(@board), notice: 'Post was successfully created.' }

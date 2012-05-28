@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120525042706) do
+ActiveRecord::Schema.define(:version => 20120528072008) do
 
   create_table "boards", :force => true do |t|
     t.string   "name"
@@ -20,16 +20,24 @@ ActiveRecord::Schema.define(:version => 20120525042706) do
     t.datetime "updated_at", :null => false
   end
 
-  create_table "posts", :force => true do |t|
-    t.string   "title"
-    t.text     "content"
+  create_table "post_boardships", :force => true do |t|
+    t.integer  "post_id"
+    t.integer  "board_id"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+  end
+
+  create_table "posts", :force => true do |t|
     t.integer  "board_id"
+    t.string   "title"
+    t.text     "content"
     t.integer  "user_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "users", :force => true do |t|
+    t.string   "username"
     t.string   "email",                  :default => "", :null => false
     t.string   "encrypted_password",     :default => "", :null => false
     t.string   "reset_password_token"
@@ -42,7 +50,6 @@ ActiveRecord::Schema.define(:version => 20120525042706) do
     t.string   "last_sign_in_ip"
     t.datetime "created_at",                             :null => false
     t.datetime "updated_at",                             :null => false
-    t.string   "username"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
