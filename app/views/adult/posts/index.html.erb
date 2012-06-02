@@ -4,7 +4,9 @@
 	
 <% @posts.each do |post| %>
   <tr>
-  	<td><%= link_to post.title,post_path(post)%></td>	
+  	<% if post.excerpt_image%>
+  	<td><%= link_to image_tag(post.excerpt_image.url(:thumbs)), adult_post_path(post) %></td>	
+  	<%end%>
     <td><%= post.content %></td>
     <td><%= post.posted_time %><br/><%= post.user.username %></td>
   </tr>
@@ -13,6 +15,3 @@
 </table>
 </div>
 <%= link_to "發表新文章" , new_post_path %>
-
-
-

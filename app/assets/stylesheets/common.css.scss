@@ -1,6 +1,7 @@
 // Place all the styles related to the common controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
 body {
   background-color: #fff;
   color: #333;
@@ -27,11 +28,23 @@ a {
     background-color: #000; } }
 
 div {
-  &.field, &.actions {
-    margin-bottom: 10px; } }
+  border: 1px solid black;}
+  //&.field, &.actions {
+    //margin-bottom: 10px; } }
 
 #notice {
   color: green; }
+
+.user_navigation{
+  table{
+    border:0px;
+    border-collapse:collapse;
+    td{
+      padding:0px;
+      }
+  }
+
+}
 
 .field_with_errors {
   padding: 2px;
@@ -57,3 +70,13 @@ div {
   ul li {
     font-size: 12px;
     list-style: square; } }
+
+#top_navigation{
+  height: 35px;
+  img {
+    height:35px;
+    display:block;
+  }
+}
+
+

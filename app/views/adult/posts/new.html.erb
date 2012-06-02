@@ -1,6 +1,6 @@
 <h1>New post</h1>
 
-<%= form_for @post, :url=>posts_path, :html => { :multipart => true } do |f| %>
+<%= form_for @post, :url=>posts_path(@board), :html => { :multipart => true } do |f| %>
   <% if @post.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@post.errors.count, "error") %> prohibited this post from being saved:</h2>
@@ -22,10 +22,8 @@
     <%= f.text_area :content %>
   </div>
   <div class="field">
-    <select id="post_general" name="post[general]">
-      <option value="true">一般</option>
-      <option value-"false">成人</option>
-    </select>
+    <%= f.label :board_id, '選擇發表類型' %><br />
+    <%= select :post, :board_id, Board.all.collect{|p| [p.name,p.id]} %>
   </div>
   <div class="field">
     <%= f.label :upload_image %><br />

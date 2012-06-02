@@ -1,8 +1,10 @@
 ModelTw::Application.routes.draw do
   devise_for :users
-  resources :boards do
+  resources :posts
+  namespace :adult do
     resources :posts
   end
+  
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

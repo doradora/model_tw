@@ -7,6 +7,7 @@ class User < ActiveRecord::Base
   has_many :posts
   # Setup accessible (or protected) attributes for your model
   attr_accessible :username,:email, :password, :password_confirmation, :remember_me
+  attr_protected :is_admin
   # attr_accessible :title, :body
   attr_accessor :login
   attr_accessible :login
@@ -17,5 +18,9 @@ class User < ActiveRecord::Base
     else
       where(conditions).first
     end
+  end
+
+  def is_admin?
+    is_admin
   end
 end

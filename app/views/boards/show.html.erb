@@ -1,23 +1,6 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <b>Name:</b>
-  <%= @board.name %>
-</p>
-
-<p>
-  <b>String:</b>
-  <%= @board.string %>
-</p>
 <table>
-  <tr>
-    <th>號數</th>
-    <th>內容</th>
-    <th>時間</th>
-    <th></th>
-    <th></th>
-  </tr>
-
 <% @posts.each do |post| %>
   <tr>
     <td><%= link_to post.title, board_post_path(@board,post) %></td>

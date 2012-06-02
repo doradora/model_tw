@@ -1,0 +1,13 @@
+<link href="/assets/posts.css" media="screen" rel="stylesheet" type="text/css">
+<div id="post_panel">
+<ul>
+<% @posts.each do |post| %>
+  <li class="post" id=<%= "post_"+post.id.to_s%>>
+        <%= link_to image_tag(post.excerpt_image.url(:medium),{:class => "img"}), post_path(post) %>
+        <%= post.title %>
+
+  </li>
+<% end %>
+<ul>
+</div>
+<%= link_to "發表新文章" , new_post_path %>

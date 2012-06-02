@@ -1,0 +1,15 @@
+ <div class="user_navigation">
+  <table>
+     <tr>
+      <td><%= link_to "home", root_path%></td>
+      <td><%= link_to "一般", posts_path%></td>
+      <td><%= link_to "成人", adult_posts_path%></td>
+    <% if user_signed_in? %>
+        <td>哈囉 <%= current_user.username %> 歡迎光臨</td>
+      <td><%= link_to("登出", destroy_user_session_path, :method => :delete )%></td>
+    <% else %>
+        <td><%= link_to "登入", new_user_session_path %></td>
+        <td><%= link_to "申請", new_user_registration_path %></td>
+    <% end %>
+  </table>
+</div>

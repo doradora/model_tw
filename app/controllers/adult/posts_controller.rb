@@ -1,8 +1,8 @@
 # encoding: utf-8
-class PostsController < ApplicationController
+class Adult::PostsController < ApplicationController
 	before_filter :authenticate_user! , :except => [ :show, :index ]
 	def index
-		@posts = Post.find_all_by_general(true)
+		@posts = Post.find_all_by_general(false)
 	end
 
 	def new
@@ -13,11 +13,12 @@ class PostsController < ApplicationController
 	end
 	
 	def create
+		@board = Board.find(params[:post][:board_id])
 		@post = Post.create(params[:post])
 		@post.user = current_user
 		respond_to do |format|
 	      if @post.save
-	        format.html { redirect_to post_path(@post), notice: 'Post was successfully created.' }
+	        format.html { redirect_to board_post_path(@board,@post), notice: 'Post was successfully created.' }
 	        format.json { render json: @post, status: :created, location: @post }
 	      else
 	        format.html { render action: "new" }
@@ -27,17 +28,19 @@ class PostsController < ApplicationController
 	end
 	
 	def edit
-		@post = Post.find(params[:id])
+		@board = Board.find(params[:board_id])
+		@post = @board.posts.find(params[:id])
 		respond_to do |format|
 			format.html
 		end
 	end
 	
 	def update
-		@post = Post.find(params[:id])
+		@board = Board.find(params[:board_id])
+		@post = @board.posts.find(params[:id])
 		respond_to do |format|
 			if @post.update_attributes(params[:post])
-				format.html{ redirect_to posts_path, notice: '成功修改'}
+				format.html{ redirect_to board_path(@board), notice: '成功修改'}
 				format.json{ head :no_content}
 			else
 				format.html { render action: 'edit' }
@@ -47,16 +50,18 @@ class PostsController < ApplicationController
 	end
 	
 	def destroy
-		@post = Post.find(params[:id])
+		@board = Board.find(params[:board_id])
+		@post = @board.posts.find(params[:id])
 		@post.destroy
 		respond_to do |format|
-			format.html {redirect_to posts_path(), notice:'刪除成功'}
+			format.html {redirect_to board_posts_path(@board), notice:'刪除成功'}
 			format.json { head :no_content }
 		end
 	end
 
 	def show
-		@post = Post.find(params[:id])
+		@board = Board.find(params[:board_id])
+		@post = @board.posts.find(params[:id])
 		respond_to do |format|
 			format.html
 		end
